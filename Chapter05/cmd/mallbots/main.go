@@ -44,7 +44,7 @@ func run() (err error) {
 	m := app{cfg: cfg}
 
 	// init infrastructure...
-	m.db, err = sql.Open("pgx", cfg.PG.Conn)
+	m.db, err = initDb(cfg.PG.Conn)
 	if err != nil {
 		return err
 	}
