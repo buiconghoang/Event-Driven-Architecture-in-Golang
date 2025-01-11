@@ -9,6 +9,7 @@ require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.10.3
 	github.com/jackc/pgx/v4 v4.16.1
 	github.com/kelseyhightower/envconfig v1.4.0
+	github.com/lib/pq v1.10.2
 	github.com/rs/zerolog v1.26.1
 	github.com/stackus/dotenv v0.0.0-20220408232627-ce2f07a165d5
 	github.com/stackus/errors v0.1.5

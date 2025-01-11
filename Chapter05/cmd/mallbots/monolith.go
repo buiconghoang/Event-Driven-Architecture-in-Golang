@@ -4,14 +4,15 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	"net"
-	"net/http"
-	"time"
-
 	"github.com/go-chi/chi/v5"
+	_ "github.com/lib/pq" // Import driver PostgreSQL
+
 	"github.com/rs/zerolog"
 	"golang.org/x/sync/errgroup"
 	"google.golang.org/grpc"
+	"net"
+	"net/http"
+	"time"
 
 	"eda-in-golang/internal/config"
 	"eda-in-golang/internal/monolith"
@@ -132,13 +133,13 @@ func initDb(dns string) (*sql.DB, error) {
 	// Open a connection to the database
 	db, err := sql.Open("postgres", dns)
 	if err != nil {
-		log.Fatalf("Failed to open a DB connection: %v\n", err)
+		fmt.Println("Failed to open a DB connection: %v\n", err)
 	}
 
 	// Test the connection
 	err = db.Ping()
 	if err != nil {
-		log.Fatalf("Failed to connect to the database: %v\n", err)
+		fmt.Println("Failed to connect to the database: %v\n", err)
 		return nil, err
 	}
 
@@ -148,7 +149,7 @@ func initDb(dns string) (*sql.DB, error) {
 	var currentTime string
 	err = db.QueryRow("SELECT NOW()").Scan(&currentTime)
 	if err != nil {
-		log.Fatalf("Query failed: %v\n", err)
+		fmt.Println("Query failed: %v\n", err)
 		return nil, err
 	}
 

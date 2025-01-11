@@ -2,7 +2,6 @@ package logging
 
 import (
 	"context"
-
 	"github.com/rs/zerolog"
 
 	"eda-in-golang/stores/internal/application"
@@ -51,8 +50,11 @@ func (a Application) RebrandStore(ctx context.Context, cmd commands.RebrandStore
 
 func (a Application) AddProduct(ctx context.Context, cmd commands.AddProduct) (err error) {
 	a.logger.Info().Msg("--> Stores.AddProduct")
-	defer func() { a.logger.Info().Err(err).Msg("<-- Stores.AddProduct") }()
-	return a.App.AddProduct(ctx, cmd)
+	defer func() {
+		a.logger.Info().Err(err).Msg("<-- Stores.AddProduct")
+	}()
+	err = a.App.AddProduct(ctx, cmd)
+	return err
 }
 
 func (a Application) RebrandProduct(ctx context.Context, cmd commands.RebrandProduct) (err error) {
